@@ -4,10 +4,12 @@ window.NewsReader = {
   Views: {},
   Routers: {},
   initialize: function() {
-		NewsReader.Collections.feeds = new NewsReader.Collections.Feeds;
-		new NewsReader.Routers.Feeds({ $el: $('#content') });
+		if (typeof(CURRENT_USER) != 'undefined') {
+			NewsReader.currentUser = new NewsReader.Models.User(CURRENT_USER);
+		}
+		NewsReader.Collections.feeds = new NewsReader.Collections.Feeds(INITIAL_FEEDS, {parse:true});
+		this.router = new NewsReader.Routers.Feeds({ $el: $('#content') });
 		Backbone.history.start();
-    // alert('Hello from Backbone!');
   }
 };
 

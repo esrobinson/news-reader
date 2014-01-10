@@ -4,5 +4,8 @@
 </div>
 
 <script>
-
+	var INITIAL_FEEDS = <%= Feed.all.to_json(:include => :entries).html_safe %>
+	<% if current_user %>
+		var CURRENT_USER = { username: <%= current_user.username.to_json.html_safe %> }
+	<% end %>
 </script>
